@@ -29,8 +29,10 @@ exports.up = function (knex) {
       table.string('task_notes')
       table
         .integer('project_id')
+        .notNullable()
+        .unsigned()
         .references('project_id')
-        .inTable('project_resources')
+        .inTable('projects')
     })
 }
 
@@ -40,8 +42,8 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists('tasks')
-    .dropTableIfExists('project_resources')
-    .dropTableIfExists('resources')
     .dropTableIfExists('projects')
+    .dropTableIfExists('project_resources')
+    .dropTableIfExists('tasks')
+    .dropTableIfExists('resources')
 }
