@@ -2,21 +2,29 @@
 const db = require('../../data/db-config')
 
 async function getAll() {
-  const projects = db('projects')
-  let transformingProjects = projects.map((item) => {
-    return { ...item, project_completed: item.project_completed == 1 }
+  const projects = await db('projects')
+  return projects.map((p) => {
+    if (p.project_completed == 0) {
+      return (p.project_completed = false)
+    } else {
+      return (p.project_completed = true)
+    }
   })
-  return transformingProjects
 }
+
 async function create(project) {
   const [project_id] = await db('projects').insert(project)
+
   const createdProject = await db('projects')
     .where('project_id', project_id)
     .first()
-  return {
-    ...createdProject,
-    project_completed: createdProject.project_completed == 1,
+
+  if (createdProject.project_completed == 0) {
+    createdProject.project_completed = false
+  } else {
+    createdProject.project_completed = true
   }
+  return createdProject
 }
 
 module.export = {
