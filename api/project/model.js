@@ -3,7 +3,7 @@ const db = require('../../data/db-config')
 
 async function getAll() {
   const projects = db('projects')
-  let transformingProjects = allProjects.map((item) => {
+  let transformingProjects = projects.map((item) => {
     return { ...item, project_completed: item.project_completed == 1 }
   })
   return transformingProjects
