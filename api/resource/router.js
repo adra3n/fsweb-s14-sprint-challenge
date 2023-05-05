@@ -2,6 +2,7 @@
 const express = require('express')
 const ResourcesModel = require('./model.js')
 const router = express.Router()
+const middleware = require('./middleware.js')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', middleware.checkUniqueName, async (req, res, next) => {
   try {
     const createdResource = await ResourcesModel.create(req.body)
     res.status(201).json(createdResource)

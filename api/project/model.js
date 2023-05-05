@@ -8,7 +8,7 @@ async function getAll() {
     if (p.project_completed == 0) {
       p.project_completed = false
       return p
-    } else {
+    } else if (p.project_completed == 1) {
       p.project_completed = true
       return p
     }
