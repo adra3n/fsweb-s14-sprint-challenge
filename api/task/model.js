@@ -12,7 +12,6 @@ async function getAll() {
       'p.project_name',
       'p.project_description'
     )
-
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].task_completed == 0) {
       tasks[i].task_completed = false
@@ -20,18 +19,15 @@ async function getAll() {
       tasks[i].task_completed = true
     }
   }
-
   return tasks
 }
 
 async function create(task) {
-  const [task_id] = await db('tasks').insert('task')
+  const [task_id] = await db('tasks').insert(task)
   const createdTask = await db('tasks').where('task_id', task_id).first()
-  if (createdTask.task_completed == 0) {
-    createdTask.task_completed = false
-  } else {
-    createdTask.task_completed = true
-  }
+  createdTask.task_completed == 0
+    ? (createdTask.task_completed = false)
+    : (createdTask.task_completed = true)
 
   return createdTask
 }

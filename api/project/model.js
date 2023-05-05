@@ -3,13 +3,18 @@ const db = require('../../data/dbConfig')
 
 async function getAll() {
   const projects = await db('projects')
+  console.log('_________projects________', projects)
   const updatedProjects = projects.map((p) => {
     if (p.project_completed == 0) {
-      return (p.project_completed = false)
+      p.project_completed = false
+      return p
     } else {
-      return (p.project_completed = true)
+      p.project_completed = true
+      return p
     }
   })
+  console.log('_________updatedProjects________', updatedProjects)
+
   return updatedProjects
 }
 
@@ -28,7 +33,7 @@ async function create(project) {
   return createdProject
 }
 
-module.export = {
+module.exports = {
   getAll,
   create,
 }
