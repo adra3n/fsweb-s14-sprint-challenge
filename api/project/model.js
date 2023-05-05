@@ -1,15 +1,16 @@
 // `Proje` modeli buraya
-const db = require('../../data/db-config')
+const db = require('../../data/dbConfig')
 
 async function getAll() {
   const projects = await db('projects')
-  return projects.map((p) => {
+  const updatedProjects = projects.map((p) => {
     if (p.project_completed == 0) {
       return (p.project_completed = false)
     } else {
       return (p.project_completed = true)
     }
   })
+  return updatedProjects
 }
 
 async function create(project) {

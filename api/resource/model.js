@@ -1,5 +1,5 @@
 // `Resource` modeli buraya
-const db = require('../../data/db-config')
+const db = require('../../data/dbConfig')
 
 async function getAll() {
   return await db('resources')

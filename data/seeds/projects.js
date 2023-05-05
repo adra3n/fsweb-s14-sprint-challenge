@@ -4,6 +4,11 @@
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
+  await knex('project_resources').truncate()
+  await knex('tasks').truncate()
+  await knex('resources').truncate()
+  await knex('projects').truncate()
+
   const defaultProjects = [
     {
       project_name: 'Oyun projesi',
@@ -11,30 +16,30 @@ exports.seed = async function (knex) {
     },
     {
       project_name: 'Portfolyo sitesi',
-      project_description: 'Kendim için portfolyo web sitesi tasarla',
+      project_description: 'Kendin için portfolyo web sitesi tasarla',
     },
   ]
 
   const defaultResources = [
     {
       resource_name: 'Javascript',
-      resource_description: 'Javascript kodu ile çalışma',
+      resource_description: 'Javascript ile çalış',
     },
     {
       resource_name: 'React',
-      resource_description: 'Dinamik web uygulamaları için kullan',
+      resource_description: 'Dinamik web uygulamaları için kullanabilirsin',
     },
   ]
 
   const defaultTasks = [
     {
-      task_description: 'React ile componentları planla',
+      task_description: 'React ile componentları düzenle',
       task_notes: 'Reduxtan yararlanabilirsin',
       project_id: 1,
     },
     {
-      task_description: 'Site için css yaz',
-      task_notes: 'Tailwind ile',
+      task_description: 'Arayüz için css/html yaz',
+      task_notes: 'Tailwind kullanabilirsin',
       project_id: 2,
     },
   ]
